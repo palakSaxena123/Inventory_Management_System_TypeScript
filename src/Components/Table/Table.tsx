@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { RootState } from "../../Redux/Store/store";
 import { toast } from "react-toastify";
 import { deleteProduct } from "../../Redux/Reducer/ProductSlice";
 import ViewProducts from "../Model/ViewModel";
@@ -11,24 +10,8 @@ import DeleteModel from "../Model/DeleteModel";
 import SearchProduct from "../Search/Search";
 import Pagination from "../Pagination/Pagination";
 import { useDelete } from "../../Hooks/useDelete";
-
-interface Product {
-  id: number ;
-  weight : string;
-  quantity : string;
-  name: string;
-  category: string;
-  subcategory: string;
-  price: number;
-  selectedImages: string[];
-  status: string;
-}
-interface RootState {
-  product: {
-    products: Product[]; 
-    searchTerm: string[];
-  };
-}
+import { Product } from "../../Types/Product";
+import { RootState } from "../../Types/Product";
 
 function Table() {
   const dispatch = useDispatch();
@@ -59,7 +42,6 @@ function Table() {
 
   const {
     handleDelete,
-    handleConfirmDelete,
     handleCancelDelete,
     deleteIndex,
     deleteModelOpen
@@ -73,7 +55,7 @@ function Table() {
   const handleConfirmDeleteAction = (id: number) => {
     if (id !== null) {
       const productToDelete = getProductById(id);
-  
+
       if (productToDelete) {
         const { weight, quantity } = productToDelete;
         dispatch(deleteProduct({ id, weight, quantity }));
@@ -84,8 +66,8 @@ function Table() {
       }
     }
   };
-  
-  const handleEdit = (productId: number) => {
+
+   const handleEdit = (productId: number) => {
     const productToEdit = newProduct.find(
       (product) => product.id === productId
     );
@@ -191,7 +173,6 @@ function Table() {
                       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                           <span
-                            // aria-hidden=""
                             className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
                           />
                           <span className="relative">
@@ -206,7 +187,6 @@ function Table() {
                         {/* =-----Delete BTN ----- */}
                         <span className="relative inline-block px-3 mx-2 py-1 font-semibold text- -900 leading-tight">
                           <span
-                            // aria-hidden=""
                             className="absolute inset-0 bg-red-200 opacity-50 rounded-full"
                           />
                           <span className="relative">
@@ -218,7 +198,7 @@ function Table() {
                         {/* --------Edit-------  */}
                         <span className="relative inline-block px-3 mx-2 py-1 font-semibold text-green-900 leading-tight">
                           <span
-                            // aria-hidden=""
+                    
                             className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
                           />
                           <span className="relative">
@@ -231,7 +211,6 @@ function Table() {
                         <span className="relative inline-block px-3 mx-2 py-1 font-semibold text-green-900 leading-tight">
                           <span
                             className="absolute inset-0 bg-blue-200 opacity-50 rounded-full"
-                            // aria-hidden=""
                           />
                           <span className="relative">
                             <button onClick={() => handleOpenView(product)}>

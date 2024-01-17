@@ -1,21 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ProductsState, Product } from "../../Types/Product";
 
-interface Product {
-  id:  number;
-  name: string;
-  weight: string;
-  quantity: string;
-}
-
-interface ProductsState {
-  products: Product[];
-  searchTerm: string[];
-  totalWeight: number;
-  totalProducts : number;
-  totalInventory : number;
-}
-
-// Function to load state from local storage
 const loadState = (): ProductsState | undefined => {
   try {
     const serializedState = localStorage.getItem("productsState");

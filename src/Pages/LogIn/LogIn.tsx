@@ -5,13 +5,8 @@ import { useFormik } from "formik";
 import { LogInContext } from '../../Context/LogInContext';
 import * as Yup from "yup";
 import "../LogIn/LogIn.css";
+import { User } from '../../Types/User';
 
-interface User {
-  id : number;
-  name : string;
-  email: string;
-
-  }
 
  function LogInForm(){
   const [showPassword, setShowPassword] = useState(false);

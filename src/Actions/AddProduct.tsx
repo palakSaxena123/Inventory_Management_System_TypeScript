@@ -10,6 +10,7 @@ import { RootState } from "../Redux/Store/store";
 import { nanoid } from "nanoid";
 import { toast } from "react-toastify";
 import { addProduct, editProduct } from "../Redux/Reducer/ProductSlice";
+import { Product } from "../Types/Product";
 
 const AddProduct = () => {
   const dispatch = useDispatch();
@@ -23,31 +24,43 @@ const AddProduct = () => {
   const handleFormSubmission = (values: any) => {
     // Check if productToEdit exists
     if (productToEdit) {
+      const existingProductWithName = products.find(
+        (product) => product.name === values.name && product.id !== productToEdit.id
+      );
+  
+      const existingProductWithSKU = products.find(
+        (product) => product.sku === (values.sku ?? "") && product.id !== productToEdit.id
+      );
+  
+      if (existingProductWithName || existingProductWithSKU) {
+        toast.error("Product with the same name or SKU already exists");
+      }else{
         // If productToEdit exists, dispatch editProduct action
         dispatch(editProduct({ id: productToEdit.id, ...values }));
         toast.success("Product updated successfully");
         navigate("/productlist");
-
-      } else {
-        // If productToEdit doesn't exist, generate a new id and dispatch addProduct action
-        const id = nanoid();
-        const numericWeight = parseFloat(values.weight);
-        const numericQuantity = parseInt(values.quantity, 10) || 0;
-
-        dispatch(
-          addProduct({
-            ...values,
-            weight: numericWeight,
-            inventory: numericQuantity,
-            id,
-          })
+      }
+    }
+       else {
+        const existingProductWithName = products.find(
+          (product) => product.name === values.name
         );
-
+    
+        const existingProductWithSKU = products.find(
+          (product) => product.sku === (values.sku ?? "")
+        );
+    
+        if (existingProductWithName || existingProductWithSKU) {
+          toast.error("Product with the same name or SKU already exists");
+        // If productToEdit doesn't exist genrate new id and dispatch addProduct action
+        }else{
+        const id = nanoid();
+         dispatch(addProduct({ ...values, id }));
         toast.success("Product added successfully");
         navigate("/productList");
       }
     }
-
+  }
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -108,7 +121,7 @@ const AddProduct = () => {
   ) => {
     const files = event.target.files;
     if (files) {
-      const imagesArray = Array.from(files).slice(0, 4); // Limiting the array to 4 images;
+      const imagesArray = Array.from(files).slice(0, 4); 
       // Convert images to Base64 strings
       const imagePromises: Promise<string>[] = imagesArray.map(
         (image: File) => {

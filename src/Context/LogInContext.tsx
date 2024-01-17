@@ -1,17 +1,6 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
-interface LogInContextType {
-  user: User | null;
-  getUser: () => User | null;
-  setUser: (newUser: User | null) => void;
-  logOut: () => void;
-}
+import { User } from '../Types/User';
+import { LogInContextType } from '../Types/LogInContextType';
 
 const initialValue: LogInContextType = {
   user: null,

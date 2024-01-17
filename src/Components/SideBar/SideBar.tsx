@@ -1,30 +1,24 @@
-import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { LogInContext } from '../../Context/LogInContext';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import { LogInContext } from "../../Context/LogInContext";
+import { useNavigate } from "react-router-dom";
+import "../SideBar/SideBar.css";
 
- function SideBar(){
-  const [selectedItem, setSelectedItem] = useState<string>('');
+function SideBar() {
   const { logOut } = useContext(LogInContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logOut(); // Call the logOut function from the context
-    navigate('/');
+    logOut();
+    navigate("/");
   };
-
-  const handleItemClick = (item: string) => {
-    setSelectedItem(item);
-  };
-
-  const isItemSelected = (item: string) => selectedItem === item;
 
   return (
-    <aside className="bg-gradient-to-br from-gray-800 to-gray-900 -translate-x-80 fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0">
+    <aside className="bg-gradient-to-br from-gray-800 to-gray-900 -translate-x-80 fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 ">
       <div className="relative border-b border-white/20">
         <a className="flex items-center gap-4 py-6 px-8" href="#/">
           <h6 className="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-white">
-             Dashboard
+            Dashboard
           </h6>
         </a>
         <button
@@ -54,15 +48,10 @@ import { useNavigate } from 'react-router-dom';
         <ul className="mb-4 flex flex-col gap-1">
           {/* ----------Dashboad---------- */}
           <li>
-            <Link to='/dashboard'>
+            <Link to="/dashboard">
               <button
-             onClick={() => handleItemClick('dashboard')}
-             className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg ${
-               isItemSelected('dashboard')
-                 ? 'bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]'
-                 : 'text-white hover:bg-white/10 active:bg-white/30'
-             } w-full flex items-center gap-4 px-4 capitalize`}
-             type="button"
+                className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                type="button"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +63,7 @@ import { useNavigate } from 'react-router-dom';
                   <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
                   <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
                 </svg>
-                <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+                <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize ">
                   dashboard
                 </p>
               </button>
@@ -82,14 +71,9 @@ import { useNavigate } from 'react-router-dom';
           </li>
           {/* ---------Product List --------- */}
           <li>
-            <Link to='/productList'>
+            <Link to="/productList">
               <button
-                onClick={() => handleItemClick('productList')}
-                className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg ${
-                  isItemSelected('productList')
-                    ? 'bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]'
-                    : 'text-white hover:bg-white/10 active:bg-white/30'
-                } w-full flex items-center gap-4 px-4 capitalize`}
+                className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
                 type="button"
               >
                 <svg
@@ -113,15 +97,10 @@ import { useNavigate } from 'react-router-dom';
           </li>
           {/* ---------Add Product ----------- */}
           <li>
-           <Link to='/addproduct'>
-            <button
-                 onClick={() => handleItemClick('AddProduct')}
-                 className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg ${
-                   isItemSelected('AddProduct')
-                     ? 'bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]'
-                     : 'text-white hover:bg-white/10 active:bg-white/30'
-                 } w-full flex items-center gap-4 px-4 capitalize`}
-                 type="button"
+            <Link to="/addproduct">
+              <button
+                className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                type="button"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -140,11 +119,11 @@ import { useNavigate } from 'react-router-dom';
                   Add Product
                 </p>
               </button>
-           </Link>
+            </Link>
           </li>
           {/* ---------Notification------------- */}
           <li>
-            <a className="" >
+            <a className="">
               <button
                 className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
                 type="button"
@@ -194,7 +173,11 @@ import { useNavigate } from 'react-router-dom';
                     clipRule="evenodd"
                   />
                 </svg>
-                <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize" color="success" onClick={handleLogout}>
+                <p
+                  className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize"
+                  color="success"
+                  onClick={handleLogout}
+                >
                   Log Out
                 </p>
               </button>
@@ -204,6 +187,6 @@ import { useNavigate } from 'react-router-dom';
       </div>
     </aside>
   );
-};
+}
 
 export default SideBar;

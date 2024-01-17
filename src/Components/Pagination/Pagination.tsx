@@ -1,11 +1,5 @@
 import React from "react";
-
-interface PaginationProps {
-  currentPage: number;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
-  totalPage: number;
-  postPerPage: number;
-}
+import { PaginationProps } from "../../Types/Pagination";
 
 const Pagination: React.FC<PaginationProps> = ({
   currentPage,

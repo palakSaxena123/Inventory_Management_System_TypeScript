@@ -1,12 +1,5 @@
 import { useState } from "react";
-
-interface UseDelete {
-  handleDelete: (id: number) => void;
-  handleConfirmDelete: () => void;
-  handleCancelDelete: () => void;
-  deleteIndex: number;
-  deleteModelOpen: boolean;
-}
+import { UseDelete } from "../Types/UseDelete";
 
 export const useDelete = (): UseDelete => {
   const [deleteModelOpen, setDeleteModelOpen] = useState(false);
@@ -17,13 +10,6 @@ export const useDelete = (): UseDelete => {
     setDeleteModelOpen(true);
   };
 
-  const handleConfirmDelete = () => {
-    if (deleteIndex === null) {
-      throw new Error("Invalid deleteIndex");
-    }
-    setDeleteModelOpen(false);
-  };
-
   const handleCancelDelete = () => {
     setDeleteIndex(null);
     setDeleteModelOpen(false);
@@ -31,7 +17,6 @@ export const useDelete = (): UseDelete => {
 
   return {
     handleDelete,
-    handleConfirmDelete,
     handleCancelDelete,
     deleteModelOpen,
     deleteIndex: deleteIndex ?? 0,

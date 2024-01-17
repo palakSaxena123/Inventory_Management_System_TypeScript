@@ -13,7 +13,6 @@ interface DeleteModelProps {
 const DeleteModel: React.FC<DeleteModelProps> = ({ isOpen, onClose, onConfirm, title, message, deleteIndex }) => {
   if (!isOpen) return null;
 
-  // Wrapper function to handle onClick event
   const handleConfirmClick = () => {
     onConfirm(deleteIndex);
   };
