@@ -3,7 +3,6 @@ import { LogInContext } from "../../Context/LogInContext";
 
  function Header(){
   const { user } = useContext(LogInContext);
-  console.log('User:', user);
 
   return (
     <div>

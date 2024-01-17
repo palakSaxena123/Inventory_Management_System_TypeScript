@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
-const BarChart = () => {
-  const chartaoptions = {
+const AreaChart = () => {
+  const chartOptions = {
     chart: {
       id: 'apexchart-example',
     },
@@ -29,9 +29,9 @@ const BarChart = () => {
       <div>
         <div id="chartTwo" className="-ml-5 -mb-9">
           <ReactApexChart
-            options={chartaoptions}
+            options={chartOptions}
             series={state.series}
-            type="bar"
+            type="area"
             height={300}
           />
         </div>
@@ -40,4 +40,4 @@ const BarChart = () => {
   );
 };
 
-export default BarChart;
+export default AreaChart;

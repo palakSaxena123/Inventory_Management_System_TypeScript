@@ -10,9 +10,10 @@ import ViewProducts from "../Model/ViewModel";
 import DeleteModel from "../Model/DeleteModel";
 import SearchProduct from "../Search/Search";
 import Pagination from "../Pagination/Pagination";
+import { useDelete } from "../../Hooks/useDelete";
 
 interface Product {
-  id: string;
+  id: number ;
   weight : string;
   quantity : string;
   name: string;
@@ -36,11 +37,9 @@ function Table() {
   const searchTerm = useSelector(
     (state: RootState) => state.product.searchTerm
   );
-  const [deleteIndex, setDeleteIndex] = useState<string | null>(null);
-  const [newProduct, setNewProduct] = useState<Product[]>([]);
 
+  const [newProduct, setNewProduct] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [deleteModalOpen, setdeleteModelOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage] = useState(3);
   const IndexOfLastPage = currentPage * postPerPage;
@@ -58,37 +57,35 @@ function Table() {
     }
   }, [searchTerm, products]);
 
-  const handleDelete = (id: string) => {
-    setDeleteIndex(id);
-    setdeleteModelOpen(true);
-  };
+  const {
+    handleDelete,
+    handleConfirmDelete,
+    handleCancelDelete,
+    deleteIndex,
+    deleteModelOpen
+  } = useDelete();
 
-  const getProductById = (id: string) => {
+  const getProductById = (id: number) => {
     const product = products.find((product) => product.id === id);
     return product;
   };
 
-  const handleConfirmDelete = (id: string) => {
-    setDeleteIndex(id);
-    if (deleteIndex !== null) {
+  const handleConfirmDeleteAction = (id: number) => {
+    if (id !== null) {
       const productToDelete = getProductById(id);
-
+  
       if (productToDelete) {
         const { weight, quantity } = productToDelete;
-        dispatch(deleteProduct({ id: deleteIndex, weight, quantity }));
+        dispatch(deleteProduct({ id, weight, quantity }));
         toast.error("Product deleted successfully");
-        setDeleteIndex(null);
-        setdeleteModelOpen(false);
+        handleCancelDelete();
+      } else {
+        console.error("Product not found");
       }
     }
   };
-
-  const handleConfirmCancel = () => {
-    setDeleteIndex(null);
-    setdeleteModelOpen(false);
-  };
-
-  const handleEdit = (productId: string) => {
+  
+  const handleEdit = (productId: number) => {
     const productToEdit = newProduct.find(
       (product) => product.id === productId
     );
@@ -213,7 +210,7 @@ function Table() {
                             className="absolute inset-0 bg-red-200 opacity-50 rounded-full"
                           />
                           <span className="relative">
-                            <button onClick={() => handleDelete(product.id)}>
+                            <button onClick={() =>  handleDelete(product.id)}>
                               Delete
                             </button>
                           </span>
@@ -267,14 +264,14 @@ function Table() {
           product={selectedProduct}
         />
       )}
-      {deleteModalOpen && (
+      { deleteModelOpen && (
         <DeleteModel
-          isOpen={deleteModalOpen}
-          onClose={handleConfirmCancel}
-          onConfirm={handleConfirmDelete}
+          isOpen={deleteModelOpen}
+          onClose={handleCancelDelete}
+          onConfirm={handleConfirmDeleteAction}
           title="Delete Task"
           message="Are you sure you want to delete this task?"
-          deleteIndex={deleteIndex}
+          deleteIndex ={deleteIndex}
         />
       )}
     </div>

@@ -4,10 +4,10 @@ import '../Model/DeleteModel.css';
 interface DeleteModelProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (id: string) => void;
+  onConfirm: (id: number) => void;
   title: string;
   message: string;
-  deleteIndex : string | null ;
+  deleteIndex : number ;
 }
 
 const DeleteModel: React.FC<DeleteModelProps> = ({ isOpen, onClose, onConfirm, title, message, deleteIndex }) => {
@@ -15,7 +15,7 @@ const DeleteModel: React.FC<DeleteModelProps> = ({ isOpen, onClose, onConfirm, t
 
   // Wrapper function to handle onClick event
   const handleConfirmClick = () => {
-    onConfirm(deleteIndex || '');
+    onConfirm(deleteIndex);
   };
 
   return (

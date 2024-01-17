@@ -4,7 +4,7 @@ import { LogInContext } from '../../Context/LogInContext';
 import { useNavigate } from 'react-router-dom';
 
  function SideBar(){
-  const [selectedItem, setSelectedItem] = useState<string>('dashboard');
+  const [selectedItem, setSelectedItem] = useState<string>('');
   const { logOut } = useContext(LogInContext);
   const navigate = useNavigate();
 

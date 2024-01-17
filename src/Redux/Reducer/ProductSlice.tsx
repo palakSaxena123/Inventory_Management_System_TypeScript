@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface Product {
-  id: string;
+  id:  number;
   name: string;
   weight: string;
   quantity: string;
@@ -73,7 +73,7 @@ const productSlice = createSlice({
       updateTotals(state);
     },
 
-    deleteProduct: (state, action: PayloadAction<{ id: string; weight: string; quantity: string }>) => {
+    deleteProduct: (state, action: PayloadAction<{ id: number; weight: string; quantity: string }>) => {
       const { id, weight, quantity } = action.payload;
       state.products = state.products.filter((product) => product.id !== id);
       state.totalWeight -= parseFloat(weight);

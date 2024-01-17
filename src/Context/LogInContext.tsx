@@ -34,7 +34,7 @@ export const LogInProvider: React.FC<LogInProviderProps> = ({ children }) => {
   });
 
   const setUser = (newUser: User | null) => {
-    console.log('Setting user:', newUser);
+    // console.log('Setting user:', newUser);
     setUserState(newUser);
 
     // Save user information to local storage
