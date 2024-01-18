@@ -31,8 +31,9 @@ function Table() {
 
   useEffect(() => {
     if (searchTerm) {
+      const searchString = searchTerm.join(' '); 
       const filteredProducts = products.filter((product) =>
-        searchTerm.some((item) => product.name.includes(item))
+        product.name.includes(searchString)
       );
       setNewProduct(filteredProducts);
     } else {
@@ -63,7 +64,6 @@ function Table() {
       }
     }
   };
-      
 
    const handleEdit = (productId: number) => {
     const productToEdit = newProduct.find(
