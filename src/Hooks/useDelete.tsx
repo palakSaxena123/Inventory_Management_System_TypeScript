@@ -14,11 +14,20 @@ export const useDelete = (): UseDelete => {
     setDeleteIndex(null);
     setDeleteModelOpen(false);
   };
-
+    
+  const handleConfirmDelete = (onConfirm: (id: number) => void) => {
+    if (deleteIndex !== null) {
+      onConfirm(deleteIndex);
+      setDeleteIndex(null);
+      setDeleteModelOpen(false);
+    }
+  };
   return {
     handleDelete,
     handleCancelDelete,
     deleteModelOpen,
     deleteIndex: deleteIndex ?? 0,
+    handleConfirmDelete,
   };
 };
+

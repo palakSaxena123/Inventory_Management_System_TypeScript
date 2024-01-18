@@ -3,4 +3,5 @@ export interface UseDelete {
     handleCancelDelete: () => void;
     deleteIndex: number;
     deleteModelOpen: boolean;
+    handleConfirmDelete: (onConfirm: (id: number) => void) => void;
   }

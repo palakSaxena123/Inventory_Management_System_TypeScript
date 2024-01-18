@@ -10,7 +10,6 @@ import { RootState } from "../Redux/Store/store";
 import { nanoid } from "nanoid";
 import { toast } from "react-toastify";
 import { addProduct, editProduct } from "../Redux/Reducer/ProductSlice";
-import { Product } from "../Types/Product";
 
 const AddProduct = () => {
   const dispatch = useDispatch();
@@ -22,45 +21,46 @@ const AddProduct = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFormSubmission = (values: any) => {
-    // Check if productToEdit exists
-    if (productToEdit) {
-      const existingProductWithName = products.find(
-        (product) => product.name === values.name && product.id !== productToEdit.id
-      );
+  if (productToEdit) {
+    // Check for existing products with the same name or SKU for editing
+    const existingProductWithName = products.find(
+      (product) => product.name === values.name && product.id !== productToEdit.id
+    );
   
-      const existingProductWithSKU = products.find(
-        (product) => product.sku === (values.sku ?? "") && product.id !== productToEdit.id
-      );
+    const existingProductWithSKU = products.find(
+      (product) => product.sku === (values.sku ?? "") && product.id !== productToEdit.id
+    );
   
-      if (existingProductWithName || existingProductWithSKU) {
-        toast.error("Product with the same name or SKU already exists");
-      }else{
-        // If productToEdit exists, dispatch editProduct action
-        dispatch(editProduct({ id: productToEdit.id, ...values }));
-        toast.success("Product updated successfully");
-        navigate("/productlist");
-      }
+    if (existingProductWithName || existingProductWithSKU) {
+      toast.error("Product with the same name or SKU already exists");
+    } else {
+      // If productToEdit exists, dispatch editProduct action
+      dispatch(editProduct({ id: productToEdit.id, ...values }));
+      toast.success("Product updated successfully");
+      navigate("/productlist");
     }
-       else {
-        const existingProductWithName = products.find(
-          (product) => product.name === values.name
-        );
-    
-        const existingProductWithSKU = products.find(
-          (product) => product.sku === (values.sku ?? "")
-        );
-    
-        if (existingProductWithName || existingProductWithSKU) {
-          toast.error("Product with the same name or SKU already exists");
-        // If productToEdit doesn't exist genrate new id and dispatch addProduct action
-        }else{
-        const id = nanoid();
-         dispatch(addProduct({ ...values, id }));
-        toast.success("Product added successfully");
-        navigate("/productList");
-      }
+  } else {
+    // Check for existing products with the same name or SKU for adding a new product
+    const existingProductWithName = products.find(
+      (product) => product.name === values.name
+    );
+  
+    const existingProductWithSKU = products.find(
+      (product) => product.sku === (values.sku ?? "")
+    );
+  
+    if (existingProductWithName || existingProductWithSKU) {
+      toast.error("Product with the same name or SKU already exists");
+    } else {
+      // If productToEdit doesn't exist, generate new id and dispatch addProduct action
+      const id = nanoid();
+      dispatch(addProduct({ ...values, id }));
+      toast.success("Product added successfully");
+      navigate("/productList");
     }
   }
+}
+  
   const formik = useFormik({
     initialValues: {
       name: "",

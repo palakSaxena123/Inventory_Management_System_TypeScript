@@ -41,11 +41,8 @@ function Table() {
   }, [searchTerm, products]);
 
   const {
-    handleDelete,
-    handleCancelDelete,
-    deleteIndex,
-    deleteModelOpen
-  } = useDelete();
+    handleDelete,handleCancelDelete, deleteIndex, deleteModelOpen} = useDelete();
+ 
 
   const getProductById = (id: number) => {
     const product = products.find((product) => product.id === id);
@@ -66,6 +63,7 @@ function Table() {
       }
     }
   };
+      
 
    const handleEdit = (productId: number) => {
     const productToEdit = newProduct.find(
@@ -100,7 +98,7 @@ function Table() {
           <div className="lg:ml-40 ml-10 space-x-8">
             <Link to="/addproduct">
               <button className="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
-                Add Product
+             Add Product
               </button>
             </Link>
           </div>
