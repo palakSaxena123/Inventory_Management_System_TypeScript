@@ -49,6 +49,7 @@ const saveState = (state: ProductsState) => {
 const productSlice = createSlice({
   name: "product",
   initialState,
+
   reducers: {
     addProduct: (state, action: PayloadAction<Product>) => {
       const newProduct = action.payload;

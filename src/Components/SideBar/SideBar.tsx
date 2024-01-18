@@ -16,9 +16,6 @@ function SideBar() {
     <aside className="bg-gradient-to-br from-gray-800 to-gray-900 -translate-x-80 fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 ">
       <div className="relative border-b border-white/20">
         <a className="flex items-center gap-4 py-6 px-8">
-          {/* <h6 className="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-white">
-            Dashboard
-          </h6> */}
         </a>
         <button
           className="middle none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-8 max-w-[32px] h-8 max-h-[32px] rounded-lg text-xs text-white  active:bg-white/30 absolute right-0 top-0 grid rounded-br-none rounded-tl-none xl:hidden"

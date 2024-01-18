@@ -7,7 +7,6 @@ import * as Yup from "yup";
 import "../LogIn/LogIn.css";
 import { User } from '../../Types/User';
 
-
  function LogInForm(){
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
