@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Inventory_Management_System_TypeScript/static/css/main.982854b2.css",
+    "main.js": "/Inventory_Management_System_TypeScript/static/js/main.86660a93.js",
+    "index.html": "/Inventory_Management_System_TypeScript/index.html",
+    "main.982854b2.css.map": "/Inventory_Management_System_TypeScript/static/css/main.982854b2.css.map",
+    "main.86660a93.js.map": "/Inventory_Management_System_TypeScript/static/js/main.86660a93.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.982854b2.css",
+    "static/js/main.86660a93.js"
+  ]
+}
